@@ -4,7 +4,7 @@ using System.Data;
 
 public partial class _Default : System.Web.UI.Page
 {
-    private string filePath = HttpContext.Current.Server.MapPath("~/App_Data/tasks.xml");
+    private string filePath = HttpContext.Current.Server.MapPath("~/tasks.xml");
 
     protected void Page_Load(object sender, EventArgs e)
     {
