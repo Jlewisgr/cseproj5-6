@@ -1,8 +1,6 @@
 using System;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Xml;
-using System.IO;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -18,9 +16,13 @@ public partial class _Default : System.Web.UI.Page
 
     protected void AddButton_Click(object sender, EventArgs e)
     {
-        TaskManager.AddTask(filePath, TaskInput.Text);
-        TaskInput.Text = "";
-        BindTasks();
+        string task = TaskInput.Text.Trim();
+        if (!string.IsNullOrEmpty(task))
+        {
+            TaskManager.AddTask(filePath, task);
+            TaskInput.Text = "";
+            BindTasks();
+        }
     }
 
     protected void TasksGrid_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -37,5 +39,19 @@ public partial class _Default : System.Web.UI.Page
     {
         TasksGrid.DataSource = TaskManager.GetTasks(filePath);
         TasksGrid.DataBind();
+    }
+
+    protected void btnGetTime_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            // Replace this with the real service proxy if using Add Service Reference
+            DateService service = new DateService();
+            lblTime.Text = service.GetCurrentDateTime();
+        }
+        catch (Exception ex)
+        {
+            lblTime.Text = "Error: " + ex.Message;
+        }
     }
 }
