@@ -4,7 +4,7 @@ using System.Text;
 
 public static class EncryptionHelper
 {
-    // 32‑byte key and 16‑byte IV – replace these with your own
+    // 32‑byte key and 16‑byte IV
     private static readonly byte[] Key = Encoding.UTF8.GetBytes("0123456789ABCDEF0123456789ABCDEF");
     private static readonly byte[] IV  = Encoding.UTF8.GetBytes("ABCDEF0123456789");
 
