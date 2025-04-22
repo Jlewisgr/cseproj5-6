@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,22 +11,31 @@
 
         <asp:TextBox ID="TaskInput" runat="server" Width="300" />
         <asp:Button ID="AddButton" runat="server" Text="Add Task" OnClick="AddButton_Click" />
-
         <br /><br />
 
-        <asp:GridView ID="TasksGrid" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowCommand="TasksGrid_RowCommand">
+        <asp:GridView ID="TasksGrid" runat="server" AutoGenerateColumns="False" OnRowCommand="TasksGrid_RowCommand">
             <Columns>
                 <asp:BoundField DataField="Description" HeaderText="Task" />
-                <asp:CheckBoxField DataField="IsDone" HeaderText="Done" />
-                <asp:ButtonField Text="Delete" CommandName="Delete" ButtonType="Button" />
+
+                <asp:TemplateField HeaderText="Done">
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkDone" runat="server"
+                            Checked='<%# Convert.ToBoolean(Eval("IsDone")) %>'
+                            AutoPostBack="true"
+                            OnCheckedChanged="chkDone_CheckedChanged"
+                            CommandArgument='<%# Container.DataItemIndex %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:Button ID="DeleteButton" runat="server" Text="Delete"
+                            CommandName="CustomDelete"
+                            CommandArgument="<%# Container.DataItemIndex %>" />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
-
-        <hr />
-
-        <h3>TryIt: Call Web Service</h3>
-        <asp:Button ID="btnGetTime" runat="server" Text="Get Server Time" OnClick="btnGetTime_Click" />
-        <asp:Label ID="lblTime" runat="server" Text="" Style="margin-left:10px" />
     </form>
 </body>
 </html>
