@@ -1,9 +1,0 @@
-/ToDoListApp/
-├── Default.aspx               # Main page UI
-├── Default.aspx.cs            # Code-behind for the Default page
-├── Global.asax                # Application-level event handler
-├── App_Code/
-│   └── TaskManager.cs         # Logic for task management (add, remove, toggle)
-├── App_Data/
-│   └── tasks.xml              # XML file to store the tasks
-├── Web.config                 # Configuration file
